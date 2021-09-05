@@ -1,4 +1,15 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App";
+import router from "./router";
+import store from "./store";
+import installElementPlus from './plugins/element'
+// import Fragment from "vue-fragment";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+installElementPlus(app);
+
+app
+    .use(router)
+    .use(store)
+    // .use(Fragment)
+    .mount("#app");
