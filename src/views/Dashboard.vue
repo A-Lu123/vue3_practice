@@ -32,53 +32,106 @@
                 </el-card>
             </el-col>
             <el-col :span="16">
-                <el-card shadow="hover" class="mgb20">
-                    <div class="message">
-                        <div class="message-box">
-                            <div class="box-icon">
-                                <i class="el-icon-video-camera-solid"></i>
-                            </div>
-                            <div>
-                                <p>1234</p>
-                                <p>访问量</p>
-                            </div>
-                        </div>
-                        <div class="message-box">
-                            <div class="box-icon">
-                                <i class="el-icon-s-marketing"></i>
-                            </div>
-                            <div>
-                                <p>2304</p>
-                                <p>上升量</p>
-                            </div>
-                        </div>
-                        <div class="message-box">
-                            <div class="box-icon">
-                                <i class="el-icon-share"></i>
-                            </div>
-                            <div>
-                                <p>662</p>
-                                <p>分享量</p>
-                            </div>
-                        </div>
-                    </div>
-                </el-card>
+                <div class="mgb20">
+                    <el-row :gutter="20" class="mgb20">
+                        <el-col :span="8">
+                            <el-card shadow="hover">
+                                <div class="grid-content-con1">
+                                    <i class="el-icon-video-camera-solid"></i>
+                                    <div class="grid-content-right">
+                                        <div class="grid-num">1234</div>
+                                        <div>访问量</div>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-card  shadow="hover">
+                                <div class="grid-content-con2">
+                                    <i class="el-icon-star-on"></i>
+                                    <div class="grid-content-right">
+                                        <div class="grid-num">974</div>
+                                        <div>点赞量</div>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-card  shadow="hover">
+                                <div class="grid-content-con3">
+                                    <i class="el-icon-share"></i>
+                                    <div class="grid-content-right">
+                                        <div class="grid-num">778</div>
+                                        <div>分享量</div>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
                 <el-card shadow="hover">
-                    
+                    <template #header>
+                        <div class="card-header">
+                            <span>代办事项</span>
+                            <el-button type="primary" size="small">添加</el-button>
+                        </div>
+                    </template>
+                    <el-table
+                        :data="todoList"
+                        :show-header="false"
+                        style="width: 100%">
+                        <el-table-column>
+                            <template #default="scope">
+                                <el-checkbox v-model="scope.row.status"></el-checkbox>
+                            </template>
+                        </el-table-column>
+                        <el-table-column>
+                            <template #default="scope">
+                                <div class="todo-item" :class="{'todo-item-del':scope.row.status}">{{ scope.row.title }}</div>    
+                            </template>
+                        </el-table-column>
+                        <el-table-column  width="60">
+                            <!-- <template> -->
+                                <i class="el-icon-edit"></i>
+                                <i class="el-icon-delete"></i>
+                            <!-- </template> -->
+                        </el-table-column>
+                    </el-table>
                 </el-card>
             </el-col>
         </el-row>
     </div>
 </template>
 <script>
+import { reactive } from "vue";
 export default {
     setup() {
         const userName = localStorage.getItem("userName") || "admin";
         const role = userName === "admin" ? "超级管理员" : "普通用户";
 
+        const todoList = reactive([
+            {
+                title: "今天要写100行代码加几个bug吧",
+                status: false,
+            },
+            {
+                title: "今天要修复100个bug",
+                status: false,
+            },
+            {
+                title: "今天要修复100个bug",
+                status: true,
+            },
+            {
+                title: "今天要写100行代码加几个bug吧",
+                status: true,
+            },
+        ]);
+
         return {
             userName,
-            role
+            role,
+            todoList
         }
     }
 }
@@ -116,5 +169,62 @@ export default {
 }
 .user-info-list span {
     margin-left: 70px;
+}
+.grid-content-con1, .grid-content-con2, .grid-content-con3{
+    display: flex;
+    align-items: center;
+}
+.grid-content-con1>i  {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(45, 140, 240);
+    font-size: 50px;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+}
+.grid-content-con2>i {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(100, 213, 114);
+    font-size: 50px;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+}
+.grid-content-con3>i  {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(242, 94, 67);
+    font-size: 50px;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+}
+.grid-content-right {
+    text-align: center;
+    margin: auto;
+}
+.grid-num  {
+    font-size: 30px;
+    font-weight: bold;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.todo-item-del {
+    text-decoration: line-through;
+    color: #999;
+}
+.todo-item {
+    font-size: 14px;
+}
+.el-card__body {
+    margin-top: 0px;
 }
 </style>
