@@ -23,10 +23,50 @@
                 <!-- 语言详情 -->
                 <el-card shadow="hover">
                     <template #header>语言详情</template>
-                    <div></div>
+                    <div>
+                        Vue<el-progress :percentage="80" :indeterminate="true" status="success"></el-progress>
+                        Javascript<el-progress :percentage="60" :indeterminate="true"></el-progress>
+                        HTML<el-progress :percentage="40.3" :indeterminate="true"></el-progress>
+                        Css<el-progress :percentage="20.8" :indeterminate="true"></el-progress>
+                    </div>
                 </el-card>
             </el-col>
-            <el-col :span="16"></el-col>
+            <el-col :span="16">
+                <el-card shadow="hover" class="mgb20">
+                    <div class="message">
+                        <div class="message-box">
+                            <div class="box-icon">
+                                <i class="el-icon-video-camera-solid"></i>
+                            </div>
+                            <div>
+                                <p>1234</p>
+                                <p>访问量</p>
+                            </div>
+                        </div>
+                        <div class="message-box">
+                            <div class="box-icon">
+                                <i class="el-icon-s-marketing"></i>
+                            </div>
+                            <div>
+                                <p>2304</p>
+                                <p>上升量</p>
+                            </div>
+                        </div>
+                        <div class="message-box">
+                            <div class="box-icon">
+                                <i class="el-icon-share"></i>
+                            </div>
+                            <div>
+                                <p>662</p>
+                                <p>分享量</p>
+                            </div>
+                        </div>
+                    </div>
+                </el-card>
+                <el-card shadow="hover">
+                    
+                </el-card>
+            </el-col>
         </el-row>
     </div>
 </template>
