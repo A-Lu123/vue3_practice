@@ -79,13 +79,25 @@
                             </template>
                         </el-table-column>
                     </el-table>
+
+                    <el-pagination
+                        background
+                        :current-page="query.pageIndex"
+                        :page-sizes="[1, 2, 4]"
+                        :page-size="query.pageSize"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        layout="sizes, prev, pager, next, ->, total, jumper"
+                        :total="pageTotal">
+                    </el-pagination>
                 </div>
 
                 <!-- 编辑按钮的dialog -->
-                <!-- <el-dialog
+                <el-dialog
                     title="编辑"
-                    v-model="dialogVisible">
-                    <el-form ref="form" :model="query" label-width="80px">
+                    v-model="dialogVisible"
+                    width="40%" center>
+                    <el-form  label-width="70px">
                         <el-form-item label="用户名">
                             <el-input v-model="form.name"></el-input>
                         </el-form-item>
@@ -95,9 +107,9 @@
                     </el-form>
                     <template #footer>
                         <el-button @click="dialogVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                        <el-button type="primary" @click="save">确 定</el-button>
                     </template>
-                </el-dialog> -->
+                </el-dialog>
             </div>
         </el-card>
     </div>
@@ -105,6 +117,7 @@
 <script>
 import { reactive, ref } from 'vue';
 import { featchTableData } from "@/api"
+import { ElMessage, ElMessageBox  } from "element-plus";
 
 export default {
     setup() {
@@ -112,8 +125,8 @@ export default {
         const query = reactive({
             address: "",
             name: "",
-            pageSize:10,
-            pageIndex:1
+            pageSize:2,
+            pageIndex:2
         });
 
 
@@ -166,7 +179,7 @@ export default {
 
                         }
                     ];
-                    pageTotal.value = 5;
+                    pageTotal.value = 4;
                 });
         }
         getTableData();
@@ -178,12 +191,65 @@ export default {
         };
         //按钮搜索
         const handleSearch = () =>  {
+            query.pageIndex = 1;
             getTableData();
         };
         //按钮编辑 
-        const handleEdit = () => {
-
+        const dialogVisible = ref(false);
+        let form = reactive({
+            address: '',
+            name: ''
+        })
+        let idx = -1;
+        const handleEdit = (row, index) => {
+            dialogVisible.value = true;
+            idx = index;
+            Object.keys(form).forEach(item => {
+                form[item] = row[item];
+            })
         };
+
+        //保存
+        const save = () => {
+            ElMessage.success(`修改第${idx}行成功`)
+            Object.keys(form).forEach(item => {
+                tableData.value[idx][item] = form[item];
+            });
+            dialogVisible.value = false;
+        }
+
+        // 删除
+        const handleDelete = (row, index) => {
+            console.log(row);
+            ElMessageBox.confirm('确定要删除吗？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: "warning",
+            })
+                .then(() => {
+                    tableData.value.splice(index, 1);
+                    ElMessage({
+                        type: 'success',
+                        message: '删除成功!',
+                    });
+                })
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '已取消删除',
+                    });
+                })
+        }
+
+        //分页器操作
+        const handleCurrentChange = (val) => {
+            query.pageIndex = val;
+            getTableData();
+        };
+        const handleSizeChange = (val) => {
+            query.pageSize = val;
+            getTableData();
+        }
 
         return {
             query,
@@ -191,7 +257,13 @@ export default {
             pageTotal,
             setHeaderRowStyle,
             handleSearch,
-            handleEdit
+            handleEdit,
+            dialogVisible,
+            form,
+            save,
+            handleDelete,
+            handleCurrentChange,
+            handleSizeChange
         }
     }
 }
