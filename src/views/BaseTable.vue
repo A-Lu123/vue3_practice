@@ -209,6 +209,16 @@ export default {
             })
         };
 
+        //分页器操作
+        const handleCurrentChange = (val) => {
+            query.pageIndex = val;
+            getTableData();
+        };
+        const handleSizeChange = (val) => {
+            query.pageSize = val;
+            getTableData();
+        }
+
         //保存
         const save = () => {
             ElMessage.success(`修改第${idx}行成功`)
@@ -241,15 +251,6 @@ export default {
                 })
         }
 
-        //分页器操作
-        const handleCurrentChange = (val) => {
-            query.pageIndex = val;
-            getTableData();
-        };
-        const handleSizeChange = (val) => {
-            query.pageSize = val;
-            getTableData();
-        }
 
         return {
             query,
