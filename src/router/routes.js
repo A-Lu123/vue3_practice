@@ -3,6 +3,7 @@ const Dashboard = () => import(/* webpackChunkName: "dashboard" */ "../views/Das
 const BaseTable = () => import(/* webpackChunkName: "basetable" */ "../views/BaseTable.vue");
 const Tabs = () => import(/* webpackChunkName: "tabs" */ "../views/Tabs.vue");
 const BasicForm = () => import(/* webpackChunkName: "basicform" */ "../views/BasicForm.vue");
+const Permission = () => import(/* webpackChunkName: "permission" */ "../views/Permission.vue");
 
 export default [
     {
@@ -40,6 +41,14 @@ export default [
                 component: BasicForm,
                 meta: {
                     title : "基本表单"
+                }
+            },
+            {
+                path: "/permission",
+                name: "permission",
+                component: Permission,
+                meta: {
+                    title: "权限测试"
                 }
             }
         ]
