@@ -48,7 +48,7 @@ export default {
             store.commit("handleCollapse", !collapse.value);
         };
 
-        const userName = localStorage.getItem("userName") || "admin";
+        const userName = localStorage.getItem("userName");
 
         //下拉框
         const router = useRouter();
@@ -56,7 +56,7 @@ export default {
             if (command === "user") {
                 router.push("/user");
             }else if (command === "loginout") {
-                router.push("/loginout");
+                router.push("/login");
                 localStorage.removeItem("userName");
             }
         };

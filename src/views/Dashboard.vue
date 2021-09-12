@@ -106,7 +106,7 @@
 import { reactive } from "vue";
 export default {
     setup() {
-        const userName = localStorage.getItem("userName") || "admin";
+        const userName = localStorage.getItem("userName");
         const role = userName === "admin" ? "超级管理员" : "普通用户";
 
         const todoList = reactive([

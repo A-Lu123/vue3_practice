@@ -73,7 +73,14 @@ export default [
                     title: "找不到页面"
                 }
             },
-           
+            {
+                path: "/donate",
+                name: "donate",
+                component: import(/* webpackChunkName: "donate" */ "../views/Donate.vue"),
+                meta: {
+                    title: "支持作者"
+                }
+            },
         ]
     },
     {
