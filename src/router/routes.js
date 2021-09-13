@@ -5,6 +5,7 @@ const Tabs = () => import(/* webpackChunkName: "tabs" */ "../views/Tabs.vue");
 const BasicForm = () => import(/* webpackChunkName: "basicform" */ "../views/BasicForm.vue");
 const Permission = () => import(/* webpackChunkName: "permission" */ "../views/Permission.vue");
 const Login = () => import(/* webpackChunkName: "login" */ "../views/Login.vue");
+const I18n = () => import(/* webpackChunkName: "i18n" */ "../views/I18n.vue");
 
 export default [
     {
@@ -81,6 +82,22 @@ export default [
                     title: "支持作者"
                 }
             },
+            {
+                path: "/i18n",
+                name: "i18n",
+                component: I18n,
+                meta: {
+                    title: "国际化"
+                }
+            },
+            {
+                path: "/editor",
+                name: "editor",
+                component:  import(/* webpackChunkName: "editor" */ "../views/Editor.vue"),
+                meta: {
+                    title: "富文本编辑器"
+                }
+            }
         ]
     },
     {

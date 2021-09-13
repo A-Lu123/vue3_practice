@@ -73,6 +73,10 @@ export default {
                                 index: "/editor",
                                 title: "富文本编辑器",
                             },
+                            {
+                                index: 'markdown',
+                                title: 'markdown编辑器'
+                            }
                         ],
                     },
                 ],
@@ -87,6 +91,21 @@ export default {
                 index: "/charts",
                 title: "schart图表",
             },
+            {
+                icon: 'el-icon-thumb',
+                index: '6',
+                title: '拖拽组件',
+                subs: [
+                    {
+                        index: 'drag',
+                        title: '拖拽列表'
+                    },
+                    {
+                        index: 'dialog',
+                        title: '拖拽弹框'
+                    }
+                ]
+                },
             {
                 icon: "el-icon-chat-line-round",
                 index: "/i18n",
