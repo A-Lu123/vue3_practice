@@ -6,6 +6,8 @@ const BasicForm = () => import(/* webpackChunkName: "basicform" */ "../views/Bas
 const Permission = () => import(/* webpackChunkName: "permission" */ "../views/Permission.vue");
 const Login = () => import(/* webpackChunkName: "login" */ "../views/Login.vue");
 const I18n = () => import(/* webpackChunkName: "i18n" */ "../views/I18n.vue");
+const Drag = () => import(/* webpackChunkName: "drag" */ "../views/Drag.vue");
+const Dialog = () => import(/* webpackChunkName: "dialog" */ "../views/Dragdialog.vue");
 
 export default [
     {
@@ -96,6 +98,22 @@ export default [
                 component:  import(/* webpackChunkName: "editor" */ "../views/Editor.vue"),
                 meta: {
                     title: "富文本编辑器"
+                }
+            },
+            {
+                path: "/drag",
+                name: "drag",
+                component: Drag,
+                meta: {
+                    title: "拖拽组件"
+                }
+            },
+            {
+                path: "/dialog",
+                name: "dialog",
+                component: Dialog,
+                meta: {
+                    title: "拖拽弹窗"
                 }
             }
         ]
